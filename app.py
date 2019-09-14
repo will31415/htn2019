@@ -1,0 +1,20 @@
+from flask import Flask, render_template
+app = Flask(__name__)
+
+@app.route('/')
+#this specifies the index route 
+
+def hello():
+    return render_template("index.html")
+
+#this creates different page basically 
+@app.route('/test')
+def test(): 
+    return "This is a test"
+
+if __name__ == '__main__':
+    app.run()
+
+
+
+
