@@ -12,19 +12,19 @@ Usage: import the module (see Jupyter notebooks for examples), or run from
        the command line as such:
 
     # Train a new model starting from pre-trained COCO weights
-    python3 treefall.py train --dataset=../../datasets/treefall/train --weights=coco
+    python3 food.py train --dataset=../../datasets/food/train --weights=coco
 
     # Resume training a model that you had trained earlier
-    python3 treefall.py train --dataset=../../datasets/treefall/train --weights=last
+    python3 food.py train --dataset=../../datasets/food/train --weights=last
 
     # Train a new model starting from ImageNet weights
-    python3 treefall.py train --dataset=../../datasets/treefall/train --weights=imagenet
+    python3 food.py train --dataset=../../datasets/food/train --weights=imagenet
 
     # Apply color splash to an image
-    python3 treefall.py splash --weights=../../mask_rcnn_treefall.h5 --image=<URL or path to file>
+    python3 food.py splash --weights=../../mask_rcnn_food.h5 --image=<URL or path to file>
 
     # Apply color splash to video using the last weights you trained
-    python3 treefall.py splash --weights=last --video=<URL or path to file>
+    python3 food.py splash --weights=last --video=<URL or path to file>
 """
 
 import os
@@ -54,19 +54,19 @@ DEFAULT_LOGS_DIR = os.path.join(ROOT_DIR, "logs")
 ############################################################
 
 
-class TreefallConfig(Config):
+class FoodConfig(Config):
     """Configuration for training on the toy  dataset.
     Derives from the base Config class and overrides some values.
     """
     # Give the configuration a recognizable name
-    NAME = "treefall"
+    NAME = "food"
 
     # We use a GPU with 12GB memory, which can fit two images.
     # Adjust down if you use a smaller GPU.
     IMAGES_PER_GPU = 2
 
     # Number of classes (including background)
-    NUM_CLASSES = 1 + 1  # Background + tree
+    NUM_CLASSES = 1 + 1  # Background + food
 
     # Number of training steps per epoch
     STEPS_PER_EPOCH = 30
@@ -81,17 +81,17 @@ class TreefallConfig(Config):
 
 class Food_Dataset(utils.Dataset):
 
-    def load_treefall(self, dataset_dir, subset):
-        """Load a subset of the Treefall dataset.
+    def load_food(self, dataset_dir, subset):
+        """Load a subset of the Food dataset.
         dataset_dir: Root directory of the dataset.
         subset: Subset to load: train or vall
         """
         # Add classes. We have only one class to add.
-        self.add_class("treefall", 1, "treefall")
+        self.add_class("food", 1, "food")
 
         # Train or validation dataset?
         assert subset in ["train", "val"]
-        dataset_dir = "../../datasets/treefall/"
+        dataset_dir = "../../datasets/food/"
         dataset_dir = os.path.join(dataset_dir, subset)
 
         # Load annotations
@@ -131,7 +131,7 @@ class Food_Dataset(utils.Dataset):
             height, width = image.shape[:2]
 
             self.add_image(
-                "treefall",
+                "food",
                 image_id=a['filename'],  # use file name as a unique image id
                 path=image_path,
                 width=width, height=height,
@@ -144,9 +144,9 @@ class Food_Dataset(utils.Dataset):
             one mask per instance.
         class_ids: a 1D array of class IDs of the instance masks.
         """
-        # If not a treefall dataset image, delegate to parent class.
+        # If not a food dataset image, delegate to parent class.
         image_info = self.image_info[image_id]
-        if image_info["source"] != "treefall":
+        if image_info["source"] != "food":
             return super(self.__class__, self).load_mask(image_id)
 
         # Convert polygons to a bitmap mask of shape
@@ -166,7 +166,7 @@ class Food_Dataset(utils.Dataset):
     def image_reference(self, image_id):
         """Return the path of the image."""
         info = self.image_info[image_id]
-        if info["source"] == "treefall":
+        if info["source"] == "food":
             return info["path"]
         else:
             super(self.__class__, self).image_reference(image_id)
@@ -175,13 +175,13 @@ class Food_Dataset(utils.Dataset):
 def train(model):
     """Train the model."""
     # Training dataset.
-    dataset_train = TreefallDataset()
-    dataset_train.load_treefall(args.dataset, "train")
+    dataset_train = FoodDataset()
+    dataset_train.load_food(args.dataset, "train")
     dataset_train.prepare()
 
     # Validation dataset
-    dataset_val = TreefallDataset()
-    dataset_val.load_treefall(args.dataset, "val")
+    dataset_val = FoodDataset()
+    dataset_val.load_food(args.dataset, "val")
     dataset_val.prepare()
 
     # *** This training schedule is an example. Update to your needs ***
@@ -276,15 +276,15 @@ if __name__ == '__main__':
 
     # Parse command line arguments
     parser = argparse.ArgumentParser(
-        description='Train Mask R-CNN to detect treefall.')
+        description='Train Mask R-CNN to detect food.')
     parser.add_argument("command",
                         metavar="<command>",
                         help="'train' or 'splash'")
     parser.add_argument('--dataset', required=False,
-                        metavar="../../datasets/treefall",
-                        help='Directory of the Treefall dataset')
+                        metavar="../../datasets/food",
+                        help='Directory of the Food dataset')
     parser.add_argument('--weights', required=True,
-                        metavar="../../mask_rcnn_treefall.h5",
+                        metavar="../../mask_rcnn_food.h5",
                         help="Path to weights .h5 file or 'coco'")
     parser.add_argument('--logs', required=False,
                         default=DEFAULT_LOGS_DIR,
@@ -311,9 +311,9 @@ if __name__ == '__main__':
 
     # Configurations
     if args.command == "train":
-        config = TreefallConfig()
+        config = FoodConfig()
     else:
-        class InferenceConfig(TreefallConfig):
+        class InferenceConfig(FoodConfig):
             # Set batch size to 1 since we'll be running inference on
             # one image at a time. Batch size = GPU_COUNT * IMAGES_PER_GPU
             GPU_COUNT = 1
