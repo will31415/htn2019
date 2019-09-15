@@ -1,0 +1,204 @@
+/* log out */
+
+.log_out {
+    position: absolute;
+    width: 98px;
+    height: 28px;
+    left: 95px;
+    top: 683px;
+    
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    
+    color: #000000;
+}    
+
+
+
+/* TODAY’S MENU */
+
+
+position: absolute;
+width: 168px;
+height: 28px;
+left: 89px;
+top: 403px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 28px;
+
+color: #000000;
+
+
+
+/* TRENDS */
+
+
+position: absolute;
+width: 90px;
+height: 28px;
+left: 95px;
+top: 496px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 28px;
+
+color: #000000;
+
+
+
+/* LOG OUT */
+
+
+position: absolute;
+width: 98px;
+height: 28px;
+left: 95px;
+top: 683px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 28px;
+
+color: #000000;
+
+
+
+/* Ellipse */
+
+
+position: absolute;
+width: 115px;
+height: 115px;
+left: 32px;
+top: 42px;
+
+background: #FFFFFF;
+
+
+/* Rectangle 2.1 */
+
+
+position: absolute;
+width: 12px;
+height: 52px;
+left: 2px;
+top: 301px;
+
+background: #474242;
+
+
+/* Rectangle 2 */
+
+
+position: absolute;
+width: 277px;
+height: 52px;
+left: 14px;
+top: 301px;
+
+background: #B2B2B2;
+
+
+/* Rectangle 3.1 */
+
+
+position: absolute;
+width: 48px;
+height: 6px;
+left: 193px;
+top: 66px;
+
+background: #FFFFFF;
+
+
+/* dashboard */
+
+
+position: absolute;
+width: 52px;
+height: 52px;
+left: 23px;
+top: 206px;
+
+
+
+/* DASHBOARD */
+
+
+position: absolute;
+width: 140px;
+height: 28px;
+left: 89px;
+top: 223px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 28px;
+
+color: #000000;
+
+
+
+/* FOOD TYPES */
+
+
+position: absolute;
+width: 140px;
+height: 20px;
+left: 89px;
+top: 317px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 28px;
+
+color: #000000;
+
+
+
+/* menu */
+
+
+position: absolute;
+width: 52px;
+height: 52px;
+left: 25px;
+top: 389px;
+
+
+
+/* trends */
+
+
+position: absolute;
+width: 52px;
+height: 52px;
+left: 26px;
+top: 486px;
+
+
+
+/* settings */
+
+
+position: absolute;
+width: 52px;
+height: 52px;
+left: 31px;
+top: 583px;
