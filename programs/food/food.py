@@ -72,7 +72,7 @@ class FoodConfig(Config):
     STEPS_PER_EPOCH = 30
 
     # Skip detections with < 80% confidence
-    DETECTION_MIN_CONFIDENCE = 0.8
+    DETECTION_MIN_CONFIDENCE = 0.90
 
 
 ############################################################
